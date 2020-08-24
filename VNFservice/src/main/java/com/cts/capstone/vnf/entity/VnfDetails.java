@@ -1,5 +1,6 @@
 package com.cts.capstone.vnf.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,9 +9,13 @@ import javax.persistence.Table;
 @Table (name="vnfdetails")
 public class VnfDetails {
 	@Id	
+	@Column(name="service_id")
 	int serviceID;
+	@Column(name="service_type")
 	String serviceType;
+	@Column(name="service_name")
 	String serviceName;
+	@Column(name="service_size")
 	char serviceSize;
 	public int getServiceID() {
 		return serviceID;

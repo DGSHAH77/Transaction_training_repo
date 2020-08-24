@@ -1,15 +1,19 @@
 package com.cts.capstone.vnf.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.cts.capstone.vnf.entity.VnfDetails;
 import com.cts.capstone.vnf.repository.VnfServiceRepository;
 
+@Transactional
+@Component
 public class VnfDetailServiceImpl implements VnfDetailsServices{
 	
 	@Autowired
@@ -25,22 +29,17 @@ public class VnfDetailServiceImpl implements VnfDetailsServices{
 	}
 
 	@Override
-	public VnfDetails serviceByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<VnfDetails> serviceByName(String name) {
+		List<VnfDetails> services = vnfRepo.findAll().stream().filter(s -> s.getServiceName().equals(name)).collect(Collectors.toList());
+		return services;
 	}
 
 	@Override
-	public VnfDetails serviceByNameandSize(String name, char size) {
+	public List<VnfDetails> serviceByNameandSize(String name, char size) {
 		
-//		List<ServiceDetails> services = new ArrayList<ServiceDetails>();
-//		
-//		services = vnfRepo.findAll();
-//		
-//		services.stream()
-//				.fileter(s -> s.getServiceSize() )
+		List<VnfDetails> services = vnfRepo.findAll().stream().filter(s -> s.getServiceName().equals(name)).sorted().collect(Collectors.toList());
 		
-		return null;
+		return services;
 	}
 
 	@Override
